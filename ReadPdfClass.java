@@ -47,11 +47,10 @@ public class ReadPdfClass
             for (int i = 0; i < lines.length; i++)
             {
                 String line = lines[i].toLowerCase();
-                if (line.contains(palabraabuscar) || line.contains(palabraabuscar2) || line.contains(palabrabuscar3))
+                if (line.contains(palabraabuscar) || line.contains(palabraabuscar2)
+                        || line.contains(palabrabuscar3))
                 {
-
                     this.lineas.add(line);
-
                 }
             }
         }

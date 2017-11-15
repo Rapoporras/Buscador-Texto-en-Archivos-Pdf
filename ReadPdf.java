@@ -26,6 +26,7 @@ public class ReadPdf
     private static File fichero;
     private static String direcctorio;
     private static DefaultListModel listModel;
+    private static Buscador b;
 
     public ReadPdf() throws IOException
     {
@@ -40,9 +41,7 @@ public class ReadPdf
         JButton btn = v.getjButton1();
         JButton btnBuscar = v.getjButton2();
         JButton btnBusquedaRec = v.getjButton4();
-
-        listModel = new DefaultListModel();
-
+        JButton btncancelar = v.getjButton5();
         JTextField text1 = v.getjTextField2();
         JTextField text2 = v.getjTextField3();
         JTextField text3 = v.getjTextField4();
@@ -92,19 +91,28 @@ public class ReadPdf
             }
         });
 
+        btncancelar.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                b.stop();
+                v.paso1();
+            }
+        });
+
         btn.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 v.invisible();
-                JFileChooser fc = new JFileChooser();
+                JFileChooser fc = new JFileChooser(fichero);
                 fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int seleccion = fc.showOpenDialog(btn);
 
                 if (seleccion == JFileChooser.APPROVE_OPTION)
                 {
-
                     fichero = fc.getSelectedFile();
 
                     v.getjTextField1().setText(fichero.getAbsolutePath());
@@ -114,7 +122,6 @@ public class ReadPdf
                 {
                     v.getjTextField1().setText("Por Favor Seleccione La Carpeta Donde Buscar");
                 }
-
             }
         });
 
@@ -124,27 +131,11 @@ public class ReadPdf
             public void actionPerformed(ActionEvent e)
             {
 
-                v.setCursor(Cursor.WAIT_CURSOR);
-                listModel.clear();
-                v.getjTextArea2().setText("");
-                buscar(fichero.getAbsolutePath(), v.getjTextField2().getText(), v.getjTextField3().getText(), v.getjTextField4().getText());
+                b = new Buscador(fichero.getAbsolutePath(), v.getjTextField2().getText(),
+                        v.getjTextField3().getText(), v.getjTextField4().getText(), v, false);
+                b.getListModel().clear();
+                b.start();
 
-                if (listModel.size() == 0)
-                {
-                    listModel.addElement("Cadena de busqueda no encontrada");
-                    v.getjList1().setEnabled(false);
-                    v.getjButton3().setEnabled(false);
-
-                } else
-                {
-                    v.getjList1().setEnabled(true);
-                    v.getjButton3().setEnabled(true);
-
-                }
-
-                v.getjList1().setModel(listModel);
-                v.setCursor(Cursor.DEFAULT_CURSOR);
-                v.paso2();
             }
         });
 
@@ -153,39 +144,22 @@ public class ReadPdf
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                v.setCursor(Cursor.WAIT_CURSOR);
-                listModel.clear();
-                v.getjTextArea2().setText("");
-                buscarRec(fichero.getAbsolutePath(), v.getjTextField2().getText(), v.getjTextField3().getText(), v.getjTextField4().getText());
 
-                if (listModel.size() == 0)
-                {
-                    listModel.addElement("Cadena de busqueda no encontrada");
-                    v.getjList1().setEnabled(false);
-                    v.getjButton3().setEnabled(false);
+                b = new Buscador(fichero.getAbsolutePath(), v.getjTextField2().getText(),
+                        v.getjTextField3().getText(), v.getjTextField4().getText(), v, true);
+                b.getListModel().clear();
+                b.start();
 
-                } else
-                {
-                    v.getjList1().setEnabled(true);
-                    v.getjButton3().setEnabled(true);
-
-                }
-
-                v.getjList1().setModel(listModel);
-                v.setCursor(Cursor.DEFAULT_CURSOR);
-                v.paso2();
             }
 
         });
 
-        JButton btnpdf = v.getjButton3();
         JList list = v.getjList1();
         list.addListSelectionListener(new ListSelectionListener()
         {
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-
                 boolean adjust = e.getValueIsAdjusting();
 
                 if (!adjust)
@@ -195,7 +169,6 @@ public class ReadPdf
                     Object selectionValues[] = list.getSelectedValues();
                     for (int i = 0, n = selections.length; i < n; i++)
                     {
-
                         try
                         {
                             direcctorio = fichero.getAbsolutePath() + "/" + selectionValues[i];
@@ -210,6 +183,7 @@ public class ReadPdf
             }
         });
 
+        JButton btnpdf = v.getjButton3();
         btnpdf.addActionListener(new ActionListener()
         {
             @Override
@@ -221,87 +195,10 @@ public class ReadPdf
 
     }
 
-    private static void buscarRec(String absolutePath, String text, String text0, String text1)
-    {
-
-        File dir = new File(absolutePath);
-
-        File[] ficheros = dir.listFiles();
-
-        if (ficheros.length != 0)
-        {
-            for (int x = 0; x < ficheros.length; x++)
-            {
-                v.getjTextArea2().setText(v.getjTextArea2().getText() + ficheros[x].getAbsolutePath() + "\n");
-                if (ficheros[x].isDirectory())
-                {
-                    buscarRec(ficheros[x].getAbsolutePath(), text, text0, text1);
-                } else
-                {
-                    String ext = obtener_extencion(ficheros[x].getAbsolutePath());
-                    if (ext.equals("pdf"))
-                    {
-                        try
-                        {
-                            ReadPdfClass pdf = new ReadPdfClass(ficheros[x].getAbsolutePath());
-                            pdf.leer(text, text0, text1);
-
-                            if (pdf.getLineas().size() != 0)
-                            {
-                                listModel.addElement(ficheros[x].getAbsolutePath());
-                            }
-                        } catch (IOException ex)
-                        {
-                            Logger.getLogger(ReadPdf.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-            }
-        }
-
-    }
-
-    public static void buscar(String directorio, String palabraabuscar, String palabrabuscar2, String palabrabuscar3)
-    {
-        File dir = new File(directorio);
-
-        File[] ficheros = dir.listFiles();
-
-        if (ficheros.length != 0)
-        {
-            for (int x = 0; x < ficheros.length; x++)
-            {
-                if (!ficheros[x].isDirectory())
-                {
-                    String ext = obtener_extencion(ficheros[x].getAbsolutePath());
-                    if (ext.equals("pdf"))
-                    {
-                        try
-                        {
-                            ReadPdfClass pdf = new ReadPdfClass(ficheros[x].getAbsolutePath());
-                            pdf.leer(palabraabuscar, palabrabuscar2, palabrabuscar3);
-
-                            if (pdf.getLineas().size() != 0)
-                            {
-                                listModel.addElement(ficheros[x].getAbsolutePath());
-                            }
-                        } catch (IOException ex)
-                        {
-                            Logger.getLogger(ReadPdf.class
-                                    .getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-            }
-        }
-
-    }
-
     public static void leer_datos(String palabraabuscar, String palabrabuscar2, String palabrabuscar3) throws IOException
     {
 
         v.setCursor(Cursor.WAIT_CURSOR);
-
         v.getjTextArea2().setText("");
 
         ReadPdfClass pdf = new ReadPdfClass(v.getjList1().getSelectedValue());
@@ -310,36 +207,23 @@ public class ReadPdf
 
         for (int i = 0; i < pdf.getLineas().size(); i++)
         {
+
             v.getjTextArea2().setText(v.getjTextArea2().getText() + i + "/- " + pdf.getLineas().get(i) + "\n");
         }
 
         v.setCursor(Cursor.DEFAULT_CURSOR);
-
     }
 
     public static void abrir_pdf(String directorio)
     {
         try
         {
-
             File path = new File(directorio);
             Desktop.getDesktop().open(path);
-
         } catch (IOException ex)
         {
-
             ex.printStackTrace();
-
         }
-    }
-
-    private static String obtener_extencion(String path)
-    {
-        String filename = path;
-
-        String fileArray[] = filename.split("\\.");
-
-        return fileArray[fileArray.length - 1];
     }
 
 }

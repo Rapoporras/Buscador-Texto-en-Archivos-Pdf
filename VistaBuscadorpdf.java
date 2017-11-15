@@ -55,6 +55,7 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         jMenu3.setText("jMenu3");
 
@@ -66,6 +67,7 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         jTextArea2.setRows(5);
+        jTextArea2.setEnabled(false);
         jScrollPane2.setViewportView(jTextArea2);
 
         jTextField1.setEditable(false);
@@ -118,6 +120,10 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
         jButton4.setText("Buscar en Carpeta y SubCarpetas");
         jButton4.setToolTipText("Este metodo sera un poco mas lento ya que accedera a todas las carpetas que esten dentro de la carpeta seleccionada");
 
+        jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton5.setText("Cancelar");
+        jButton5.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,9 +132,8 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField1)
@@ -136,20 +141,22 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                                 .addGap(21, 21, 21))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -168,16 +175,18 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -293,23 +302,68 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
         this.jTextField2 = jTextField2;
     }
 
+    public JButton getjButton5()
+    {
+        return jButton5;
+    }
+
+    public void setjButton5(JButton jButton5)
+    {
+        this.jButton5 = jButton5;
+    }
+
     public void paso1()
     {
+
         this.jTextField2.setVisible(true);
         this.jTextField3.setVisible(true);
         this.jTextField4.setVisible(true);
         this.jButton2.setVisible(true);
         this.jButton4.setVisible(true);
+        this.jTextField2.setEnabled(true);
+        this.jTextField3.setEnabled(true);
+        this.jTextField4.setEnabled(true);
+        this.jButton2.setEnabled(true);
+        this.jButton4.setEnabled(true);
+        this.jButton5.setVisible(false);
+        this.jButton5.setVisible(false);
+        this.jScrollPane2.setVisible(false);
+        this.jTextArea2.setVisible(false);
+        this.jButton1.setEnabled(true);
     }
 
     public void paso2()
     {
         this.jList1.setVisible(true);
-        this.jTextArea2.setVisible(true);
         this.jLabel1.setVisible(true);
         this.jLabel2.setVisible(true);
-        this.jScrollPane2.setVisible(true);
+        this.jButton3.setVisible(true);
         this.jScrollPane3.setVisible(true);
+        this.jButton5.setVisible(false);
+        this.jTextField2.setEnabled(true);
+        this.jTextField3.setEnabled(true);
+        this.jTextField4.setEnabled(true);
+        this.jButton2.setEnabled(true);
+        this.jButton4.setEnabled(true);
+    }
+
+    public void busqueda()
+    {
+        this.jTextArea2.setVisible(true);
+        this.jScrollPane2.setVisible(true);
+        this.jButton5.setVisible(true);
+        this.jTextField2.setEnabled(false);
+        this.jTextField3.setEnabled(false);
+        this.jTextField4.setEnabled(false);
+        this.jButton2.setEnabled(false);
+        this.jButton4.setEnabled(false);
+        this.jList1.setVisible(false);
+        this.jLabel1.setVisible(false);
+        this.jLabel2.setVisible(false);
+        this.jScrollPane3.setVisible(false);
+        this.jButton3.setVisible(false);
+        this.jButton1.setEnabled(false);
+
     }
 
     public void invisible()
@@ -326,6 +380,7 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
         this.jTextField3.setVisible(false);
         this.jTextField4.setVisible(false);
         this.jButton4.setVisible(false);
+        this.jButton5.setVisible(false);
 
     }
 
@@ -374,6 +429,7 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
@@ -386,4 +442,5 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+
 }
