@@ -357,12 +357,16 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
         this.jTextField4.setEnabled(false);
         this.jButton2.setEnabled(false);
         this.jButton4.setEnabled(false);
-        this.jList1.setVisible(false);
-        this.jLabel1.setVisible(false);
-        this.jLabel2.setVisible(false);
-        this.jScrollPane3.setVisible(false);
-        this.jButton3.setVisible(false);
+        this.jList1.setVisible(true);
+        this.jScrollPane3.setVisible(true);
+        this.jLabel1.setVisible(true);
+        this.jLabel2.setVisible(true);
+        this.jList1.setEnabled(false);
+        this.jScrollPane3.setEnabled(false);
+        this.jButton3.setVisible(true);
         this.jButton1.setEnabled(false);
+        this.jTextArea2.setEnabled(false);
+        this.jScrollPane2.setEnabled(false);
 
     }
 
@@ -382,6 +386,29 @@ public class VistaBuscadorpdf extends javax.swing.JFrame
         this.jButton4.setVisible(false);
         this.jButton5.setVisible(false);
 
+    }
+
+    public void cancerlar()
+    {
+        this.jTextField2.setVisible(true);
+        this.jTextField3.setVisible(true);
+        this.jTextField4.setVisible(true);
+        this.jButton2.setVisible(true);
+        this.jButton4.setVisible(true);
+        this.jTextField2.setEnabled(true);
+        this.jTextField3.setEnabled(true);
+        this.jTextField4.setEnabled(true);
+        this.jButton2.setEnabled(true);
+        this.jButton4.setEnabled(true);
+        this.jButton5.setVisible(false);
+        this.jScrollPane2.setEnabled(true);
+        this.jTextArea2.setEnabled(true);
+        this.jScrollPane2.setVisible(true);
+        this.jTextArea2.setVisible(true);
+        this.jButton1.setEnabled(true);
+        this.jList1.setEnabled(true);
+        this.jScrollPane3.setEnabled(true);
+        this.jButton3.setEnabled(true);
     }
 
     public JTextField getjTextField3()

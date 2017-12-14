@@ -97,7 +97,7 @@ public class ReadPdf
             public void actionPerformed(ActionEvent e)
             {
                 b.stop();
-                v.paso1();
+                v.cancerlar();
             }
         });
 

@@ -48,16 +48,8 @@ public class Buscador extends Thread
         {
             this.buscar(this.directorio);
         }
-        if (this.listModel.size() == 0)
-        {
-            this.listModel.addElement("Cadena de busqueda no encontrada");
-            this.vista.getjList1().setEnabled(false);
-            this.vista.getjButton3().setEnabled(false);
-        } else
-        {
-            this.vista.getjList1().setEnabled(true);
-            this.vista.getjButton3().setEnabled(true);
-        }
+
+        comprobar_lista();
 
         this.vista.getjList1().setModel(this.listModel);
         this.vista.paso2();
@@ -190,7 +182,7 @@ public class Buscador extends Thread
                         }
                     }
                 }
-
+                this.vista.getjList1().setModel(this.listModel);
             }
         }
 
@@ -228,9 +220,24 @@ public class Buscador extends Thread
                         }
                     }
                 }
+                this.vista.getjList1().setModel(this.listModel);
             }
         }
 
+    }
+
+    public void comprobar_lista()
+    {
+        if (this.listModel.size() == 0)
+        {
+            this.listModel.addElement("Cadena de busqueda no encontrada");
+            this.vista.getjList1().setEnabled(false);
+            this.vista.getjButton3().setEnabled(false);
+        } else
+        {
+            this.vista.getjList1().setEnabled(true);
+            this.vista.getjButton3().setEnabled(true);
+        }
     }
 
 }
